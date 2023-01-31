@@ -1,0 +1,27 @@
+@use "../utils/variables" as *;
+
+.nav-container{
+    max-width: 100vw;
+    display: flex;
+    justify-content: space-between;
+    background-color: $nav-background;
+    align-items: center;
+    padding: 1.5rem;
+    color: $font-color;
+    h1{
+        background-color: inherit;
+        color: $font-color-logo;
+        font-size: $font-size-logo;
+        font-weight: bold;
+        letter-spacing: 3px;
+    }
+    .nav-links{
+        display: flex;
+        justify-content: space-around;
+        width: 150px;
+        background-color: inherit;
+        p{
+            background-color: inherit;
+        }
+    }
+}
