@@ -5,8 +5,8 @@ export default function Navbar() {
     <nav className="nav-container">
       <h1 className="nav-logo">ChatZar</h1>
       <div className="nav-links">
-        <p id="login-btn">Login</p>
-        <p id="register-btn">Register</p>
+        <button id="login-btn">Login</button>
+        <button id="register-btn">Register</button>
       </div>
     </nav>
   );
