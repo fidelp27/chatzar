@@ -19,7 +19,7 @@ export default function Home() {
         </p>
       </div>
       <img
-        src="https://i.imgur.com/shvLvit.png"
+        src="https://i.imgur.com/LqPTkgs.png"
         className="image-welcome"
         alt="imagen"
       />

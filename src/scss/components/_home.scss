@@ -7,13 +7,23 @@
     padding: 0;
     margin:0;
     .container-section{
-        width: 100vw;
+        width: 40vw;
         height: 90vh;
-        .image-welcome{
-            width: inherit;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 2;
+            
+    }   
+        
+        .image-welcome{    
             height: inherit;
             object-fit: contain;
-            z-index: 0;
+            position: absolute;
+            right: 0px;
+            top: 80px;
+            z-index: 1;
         }
-    }
+    
 }
