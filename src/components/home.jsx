@@ -3,26 +3,22 @@ import React from 'react';
 export default function Home() {
   return (
     <div className="container-welcome">
-      <div className="container-section container-section-content">
-        <h2> ¡Bienvenido a Chat-Zar! </h2>
-        <p>
-          ¿Estás listo para conocer a alguien nuevo y tener una experiencia
-          única?
-        </p>
+      <div className="container-section-content">
+        <h2> CONOCE PERSONAS AL AZAR CON</h2>
+        <h2 className="name">CHATZAR</h2>
         <p>
           Con nuestra app de chat al azar, puedes chatear con personas de todo
           el mundo y hacer amigos en un abrir y cerrar de ojos
         </p>
-        <p>
-          ¡Regístrate hoy y empieza a explorar nuevas perspectivas y a hacer
-          amigos al azar!
-        </p>
+        <button className="button-cta">Comienza YA</button>
       </div>
-      <img
-        src="https://i.imgur.com/LqPTkgs.png"
-        className="image-welcome"
-        alt="imagen"
-      />
+      <div className="container-section-image">
+        <img
+          src="https://i.imgur.com/LqPTkgs.png"
+          className="image-welcome"
+          alt="imagen"
+        />
+      </div>
     </div>
   );
 }
