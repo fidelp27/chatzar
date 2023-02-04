@@ -1,0 +1,18 @@
+@use "./variables";
+
+/*media queries*/
+$breakpoints:(
+    "xs": 350px,
+    "sm": 540px,
+    "md":768px,
+    "lg": 1024px
+);
+@mixin media-up($breakpoint){
+    @if map-has-key($breakpoints, $breakpoint ){
+        @media screen and (min-width: map-get($breakpoints, $breakpoint)) {
+            @content;            
+        }
+    }@else{
+        @warn "El valor del breakpoint '#{breakpoint}' no ha sido declarado"  
+    }
+}
