@@ -15,15 +15,22 @@
     background-repeat: no-repeat;
     background-size: cover;  
     @include media-up(sm){
-        height: 85vh;
+        height: 90vh;
     }
     @include media-up(md){
         width: 90%;
         flex-direction: row;
         background-image: none;
         justify-content: space-between;
-
     }
+    @include media-up(lg){
+        width: 100vw; 
+        background-image: url("https://i.imgur.com/2nbyHiQ.png");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;  
+    }
+
     .container-section-content{
         width: 90%;
         display: flex;
@@ -42,9 +49,11 @@
            margin: 1rem 0; 
         }
         @include media-up(lg){
-            width: 50%;
-            z-index: 1;
+            background-color: rgba($color: #fff, $alpha: 0.1);
+            margin-left: 50px;
+ 
          }
+       
         h2{
             font-size: $font-size-welcome;
             font-weight: bold;
@@ -55,10 +64,14 @@
             }
             @include media-up(lg){
                 font-size: $font-size-welcome;
+                width: 40vw;
+                font-weight: 900;
+                color: $font-color;
+                -webkit-text-stroke: 0.5px $font-color-p;
             }
         }
         .name{
-            color: $font-color-logo;
+            color: $font-color-text-welcome;
             font-weight: 900;
             @include media-up(md){
                 font-size: $font-size-welcome;
@@ -70,6 +83,12 @@
             background-color: transparent;
             @include media-up(md){
                 font-size: $font-size-small;
+            }
+            @include media-up(lg){
+                width: 40vw;
+                color: $font-color-p;
+                font-size: $font-size-medium;
+                letter-spacing: 0.5px;
             }
         }
         .button-cta{
@@ -91,6 +110,7 @@
     .container-section-image{
         display: none;
         height: 87vh;
+        background-color: transparent;
         @include media-up(md){
             display: flex;
             width: 60vw;
@@ -103,6 +123,7 @@
             right: 0px;
             top: 70px;
             z-index: 0;
+            background-color: transparent;
         }
         }
         
