@@ -14,7 +14,7 @@ export default function Home() {
       </div>
       <div className="container-section-image">
         <img
-          src="https://i.imgur.com/OpwW6cg.png"
+          src="https://i.imgur.com/XGANX9q.png"
           className="image-welcome"
           alt="imagen"
         />
