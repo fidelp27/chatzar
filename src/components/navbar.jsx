@@ -8,17 +8,15 @@ export default function Navbar() {
   const googleSignIn = () => {
     const provider = new GoogleAuthProvider();
     signInWithRedirect(auth, provider);
-    localStorage.setItem('user', true);
   };
   const signOut = () => {
     auth.signOut();
-    localStorage.removeItem('user');
   };
   return (
     <nav className="nav-container">
       <h1 className="nav-logo">ChatZar</h1>
       <div className="nav-links">
-        {!localStorage.getItem('user') ? (
+        {!user ? (
           <button id="login-btn" onClick={() => googleSignIn()}>
             Login
           </button>
