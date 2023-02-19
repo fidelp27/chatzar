@@ -3,11 +3,27 @@ import { auth, db } from '../firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
-import { doc, serverTimestamp, setDoc, updateDoc } from 'firebase/firestore';
+import {
+  doc,
+  getDoc,
+  serverTimestamp,
+  setDoc,
+  updateDoc,
+} from 'firebase/firestore';
 
 const Navbar = () => {
   const [user] = useAuthState(auth);
   const navigate = useNavigate();
+
+  const checkCreateUser = async (user) => {
+    //** Se crea una referencia al documento
+    const docRef = doc(db, 'users', user.uid);
+    //* Se obtiene el documento y si no existe se crea un documento nuevo con el usuario
+    const docSnap = await getDoc(docRef);
+    if (!docSnap.exists()) {
+      createUser(user);
+    }
+  };
 
   const createUser = async (user) => {
     //! creación de usuario si no existe, modifica el anterior si ya existe.
@@ -49,7 +65,7 @@ const Navbar = () => {
 
   useEffect(() => {
     if (user) {
-      createUser(user);
+      checkCreateUser(user);
     }
   }, [user]);
 

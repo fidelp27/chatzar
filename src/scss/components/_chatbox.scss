@@ -1,0 +1,51 @@
+@use "../utils/variables" as *;
+@use "../utils/mixins" as *;
+
+.chat-box{
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    background-color: $fondo-chat;
+    margin: 0 auto;
+}
+
+.messages-wrapper{
+    margin-bottom: 1rem;
+    .chat-bubble{
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        width: fit-content;
+        background-color: $fondo-receptor;
+        margin: 1rem 2rem;
+        border-radius: 1rem; 
+        color: $backgorund; 
+        .chat-bubble__right{
+            padding: .5rem;
+            overflow-wrap: break-word;
+            padding: .5rem;
+            .user-name{
+                font-size: $font-size-tiny;
+                margin: .3rem 0;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+            }
+            .user-message{
+                font-size: $font-size-small;
+                margin: 0;
+            }
+            .message-time{
+                font-size: $font-size-tiny;
+                text-align: right;
+                margin-top: .5rem;
+            }
+        }     
+    }
+    .right{
+        margin-left: auto;
+        background-color: $fondo-contraste;
+
+
+    }
+   
+}

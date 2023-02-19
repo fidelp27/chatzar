@@ -9,16 +9,13 @@ import {
 import { db } from '../firebase';
 import SendMessage from './sendMessage';
 import Message from './message';
+import { ToastContainer } from 'react-toastify';
 
 const Chatbox = () => {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
-    const q = query(
-      collection(db, 'messages'),
-      orderBy('createdAt'),
-      limit(50)
-    );
+    const q = query(collection(db, 'messages'), orderBy('createdAt'));
     const unsubscribe = onSnapshot(q, (QuerySnapshot) => {
       let messages = [];
       QuerySnapshot.forEach((doc) => {
@@ -36,8 +33,19 @@ const Chatbox = () => {
           <Message key={message.id} message={message} />
         ))}
       </div>
-      <span ref={scroll}></span>
-      <SendMessage scroll={scroll} />
+      <SendMessage />
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
     </main>
   );
 };

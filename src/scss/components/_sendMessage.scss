@@ -1,0 +1,38 @@
+@use "../utils/variables" as *;
+@use "../utils/mixins" as *;
+
+.form-send-message{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
+    height: 4rem;
+    margin-top: 1rem;
+    background-color: $fondo-contraste;
+    .form-input{
+        width: 83vw;
+        height: 2rem;
+        border: 1px solid $btn-hover;
+        border-radius: 10px;
+        outline: none;
+        text-indent: 10px;
+        font-size: $font-size-small;
+        color: $backgorund;
+        padding: 1rem;
+        background-color: transparent;
+    }
+    .form-button{
+        width: 12vw;
+        height: 2rem;
+        background-color: transparent;
+        border-radius: none;
+        border: none;
+        img{
+            background-color: transparent;
+            width: fit-content;
+            height: fit-content;
+        }  
+    }
+}

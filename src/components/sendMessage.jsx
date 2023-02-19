@@ -23,8 +23,6 @@ const SendMessage = () => {
       uid,
     });
     setMessage('');
-    event.target.reset();
-    scroll.current.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
@@ -33,7 +31,6 @@ const SendMessage = () => {
         className="form-send-message"
         onSubmit={(event) => sendMessage(event)}
       >
-        <label>Enviar</label>
         <input
           type="text"
           name="send-message"
@@ -41,21 +38,12 @@ const SendMessage = () => {
           className="form-input"
           placeholder="...text message"
           onChange={(e) => setMessage(e.target.value)}
+          value={message}
         />
-        <button type="submit">Enviar</button>
+        <button type="submit" className="form-button">
+          <img src="https://i.imgur.com/mU0KmN8.png" alt="send-icon" />
+        </button>
       </form>
-      <ToastContainer
-        position="top-center"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
     </>
   );
 };
