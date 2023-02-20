@@ -1,0 +1,17 @@
+@use "../utils/variables" as *;
+@use "../utils/mixins" as *;
+
+.container-friends{
+    width: 100vw;
+    height: 90vh;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    background-color: $fondo-contraste;
+    color: $backgorund;
+    position: relative;
+    @include media-up("sm"){        
+        width: 20vw;
+    }
+    
+}

@@ -4,6 +4,8 @@ import NotFound from '../components/notFound';
 import Chatbox from '../components/chatbox';
 import LayoutPublic from './layoutPublic';
 import LayoutPrivate from './layoutPrivate';
+import ProfileUser from '../components/profileUser';
+import Chat from '../views/chat';
 
 export const router = createBrowserRouter([
   {
@@ -16,12 +18,12 @@ export const router = createBrowserRouter([
         element: <Homepage />,
       },
       {
-        path: '/chatbox',
+        path: '/chat',
         element: <LayoutPrivate />,
         children: [
           {
             index: true,
-            element: <Chatbox />,
+            element: <Chat />,
           },
         ],
       },

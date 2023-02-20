@@ -1,0 +1,48 @@
+@use "../utils/variables" as *;
+@use "../utils/mixins" as *;
+
+
+.container-userProfile{
+    width: 100vw;
+    height: 90vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: last baseline;
+    flex-direction: column;
+    background-color: $fondo-contraste;
+    color: $backgorund;
+    position: relative;
+    @include media-up("sm"){        
+        width: 20vw;
+    }
+    :last-child{
+        margin-bottom: 1rem;
+    }
+    .btn-close{
+        position:absolute;
+        right: 20px;
+        background-color: $btn-hover;
+        border-radius: .5rem;
+        padding: 10px;
+        top: 10px;
+    }
+    .container-info{
+        width: 90%;
+        text-align: center;
+        margin: 40px auto 0;
+        font-size: $font-size-small;
+        img{
+            border-radius: 1rem;
+        }
+        p{            
+            line-height: 2;
+        }        
+    }
+    .container-options,.container-actions{
+        width: 90%;
+        text-align: center;
+        line-height: 2;
+        margin: 0 auto;
+    }
+    
+}

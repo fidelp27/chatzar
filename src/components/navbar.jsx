@@ -66,6 +66,11 @@ const Navbar = () => {
   useEffect(() => {
     if (user) {
       checkCreateUser(user);
+      const userUpdate = doc(db, 'users', user.uid);
+      //?modificar el user
+      updateDoc(userUpdate, {
+        isOnline: true,
+      });
     }
   }, [user]);
 

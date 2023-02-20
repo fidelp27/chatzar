@@ -1,17 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
-import {
-  query,
-  collection,
-  orderBy,
-  onSnapshot,
-  limit,
-} from 'firebase/firestore';
+import { query, collection, orderBy, onSnapshot } from 'firebase/firestore';
 import { db } from '../firebase';
 import SendMessage from './sendMessage';
 import Message from './message';
 import { ToastContainer } from 'react-toastify';
 
-const Chatbox = () => {
+const Chatbox = ({ setShow }) => {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
@@ -30,7 +24,7 @@ const Chatbox = () => {
     <main className="chat-box">
       <div className="messages-wrapper">
         {messages?.map((message) => (
-          <Message key={message.id} message={message} />
+          <Message key={message.id} message={message} setShow={setShow} />
         ))}
       </div>
       <SendMessage />
