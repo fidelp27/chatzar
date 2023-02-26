@@ -3,3 +3,4 @@ const userAvatar = (name) => {
   const initials = namesArray.map((word) => word.charAt(0).toUpperCase());
   return initials.join('');
 };
+export default userAvatar;

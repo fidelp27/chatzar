@@ -5,13 +5,32 @@
     width: 100vw;
     height: 90vh;
     display: flex;
-    justify-content: space-between;
     flex-direction: column;
     background-color: $fondo-contraste;
     color: $backgorund;
     position: relative;
+    margin: 0 auto;
     @include media-up("sm"){        
         width: 20vw;
     }
-    
+    .search-input{
+        width: 80%;
+        margin: 1rem auto;
+        border: none;
+        border-radius: 1rem;
+        background-color: $fondo-chat;
+        padding: 1rem;
+        outline: none;
+        color: $backgorund;
+    }
+    .filter-users-container{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 100vw;
+        margin: 0 auto;
+        background-color: transparent;
+        position: absolute;
+        top: 70px;
+    }
 }

@@ -47,7 +47,7 @@ const Navbar = () => {
       const provider = new GoogleAuthProvider();
       //** ventana emergente para autorizar
       await signInWithPopup(auth, provider);
-      navigate('/chatbox', { replace: true });
+      navigate('/chat', { replace: true });
     } catch (error) {
       console.error(error);
     }
