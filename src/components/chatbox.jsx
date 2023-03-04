@@ -5,9 +5,13 @@ import SendMessage from './sendMessage';
 import Message from './message';
 import { ToastContainer } from 'react-toastify';
 
-const Chatbox = ({ setShow }) => {
+const Chatbox = () => {
   const [messages, setMessages] = useState([]);
+  const messagesEndRef = useRef(null);
 
+  const scrollBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
   useEffect(() => {
     const q = query(collection(db, 'messages'), orderBy('createdAt'));
     const unsubscribe = onSnapshot(q, (QuerySnapshot) => {
@@ -20,12 +24,17 @@ const Chatbox = ({ setShow }) => {
     return () => unsubscribe;
   }, []);
 
+  useEffect(() => {
+    scrollBottom();
+  }, [messages]);
+
   return (
     <main className="chat-box">
       <div className="messages-wrapper">
         {messages?.map((message) => (
-          <Message key={message.id} message={message} setShow={setShow} />
+          <Message key={message.id} message={message} />
         ))}
+        <div ref={messagesEndRef} />
       </div>
       <SendMessage />
       <ToastContainer

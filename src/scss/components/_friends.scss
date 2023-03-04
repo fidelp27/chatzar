@@ -28,9 +28,18 @@
         flex-direction: column;
         justify-content: space-between;
         width: 100vw;
+        height: 30vh;
         margin: 0 auto;
         background-color: transparent;
         position: absolute;
         top: 70px;
+        overflow-y: scroll;
+    }
+    .friends-section{
+        margin-top: 30vh;
+        text-align: center;
+        img{
+            cursor: pointer;
+        }
     }
 }

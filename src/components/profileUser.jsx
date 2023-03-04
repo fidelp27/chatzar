@@ -1,27 +1,17 @@
 import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { Link, useNavigate } from 'react-router-dom';
 import { auth } from '../firebase';
+import Profile_template from './profile_template';
 
-const ProfileUser = ({ setShow }) => {
+const ProfileUser = () => {
   const [user] = useAuthState(auth);
+
   return (
-    <div className="container-userProfile">
-      <span className="btn-close" onClick={() => setShow(false)}>
-        X
-      </span>
-      <div className="container-info">
-        <img
-          src={user.photoURL}
-          className="profile-img"
-          alt={user.displayName}
-        />
-        <p className="user-name">{user.displayName}</p>
-        <p className="user-email">{user.email}</p>
-        <p className="user-date">Member since: {user.metadata.creationTime}</p>
-      </div>
+    <Profile_template user={user}>
       <div className="container-options">
         <ul>
-          <li>Friends</li>
+          <Link to="/chat/friends">Friends</Link>
           <li>Messages</li>
         </ul>
       </div>
@@ -31,7 +21,7 @@ const ProfileUser = ({ setShow }) => {
           <li>Logout</li>
         </ul>
       </div>
-    </div>
+    </Profile_template>
   );
 };
 export default ProfileUser;

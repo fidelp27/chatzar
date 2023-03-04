@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { auth, db } from '../firebase';
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 import { customError } from '../utils/customError';
-import { ToastContainer } from 'react-toastify';
+import { useGetRandomOnlineUser } from '../utils/useGetRandomOnlineUser';
 
 const SendMessage = () => {
   const [message, setMessage] = useState('');

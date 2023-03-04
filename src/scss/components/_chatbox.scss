@@ -6,24 +6,28 @@
     display: flex;
     flex-direction: column;
     background-color: $fondo-chat;
-    margin: 0 auto;
+    margin: 0 auto 4rem auto;
 }
 
 .messages-wrapper{
-    margin-bottom: 1rem;
+    
     .chat-bubble{
         display: flex;
         align-items: flex-start;
         justify-content: space-between;
-        width: fit-content;
+        max-width: 220px;
         background-color: $fondo-receptor;
         margin: 1rem 2rem;
         border-radius: 1rem; 
-        color: $backgorund; 
+        color: $backgorund;
+        word-wrap: break-word;
+
+        
         .chat-bubble__right{
             padding: .5rem;
-            overflow-wrap: break-word;
-            padding: .5rem;
+            word-wrap: break-word;
+            width: 100%;
+
             .user-name{
                 font-size: $font-size-tiny;
                 margin: .3rem 0;
@@ -33,6 +37,7 @@
             .user-message{
                 font-size: $font-size-small;
                 margin: 0;
+                max-width: 200px;
             }
             .message-time{
                 font-size: $font-size-tiny;

@@ -1,17 +1,19 @@
 import { collection, getDocs, onSnapshot } from 'firebase/firestore';
 import React, { useState, useEffect } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { useNavigate } from 'react-router-dom';
 import { auth, db } from '../firebase';
 import UsersList from './usersList';
-
+import { useCreateConversation } from '../utils/useCreateConversation';
 export default function Friends() {
   const [search, setSearch] = useState('');
   const [users, setUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [friends, setFriends] = useState([]);
   const [user] = useAuthState(auth);
-
-  const getUsers = async () => {
+  const navigate = useNavigate();
+  const createConversation = useCreateConversation();
+  /* const getUsers = async () => {
     const querySnapshot = await collection(db, 'users');
     onSnapshot(querySnapshot, (snapshot) => {
       const usersData = [];
@@ -20,7 +22,7 @@ export default function Friends() {
       });
       setUsers([...usersData]);
     });
-  };
+  }; */
 
   const getFriends = async () => {
     if (user) {
@@ -42,9 +44,9 @@ export default function Friends() {
     }
   };
 
-  useEffect(() => {
+  /*   useEffect(() => {
     getUsers();
-  }, []);
+  }, []); */
 
   useEffect(() => {
     filterUsers(search);
@@ -68,11 +70,18 @@ export default function Friends() {
       </div>
 
       <div className="friends-section">
-        {!friends ? (
-          <p>Aún no tienes amigos</p>
+        {!friends || friends.length <= 0 ? (
+          <>
+            <p>You have no friends yet</p>
+            <img src="https://i.imgur.com/6r6251D.png" alt="lookingfor-img" />
+            <button onClick={() => navigate(-1)}>Volver</button>
+            <button onClick={() => createConversation()}>
+              Crear conversación
+            </button>
+          </>
         ) : (
           friends.map((user) => {
-            return <UsersList user={user} key={user.uid} />;
+            return <UsersList user={friends} key={user.uid} />;
           })
         )}
       </div>
