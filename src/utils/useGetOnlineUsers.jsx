@@ -12,6 +12,7 @@ export const useGetOnlineUsers = () => {
       querySnapshot.forEach((user) => users.push(user.data()));
     });
     setOnlineUsers(users);
+    console.log(users);
     return () => unsubscribe;
   }, []);
 

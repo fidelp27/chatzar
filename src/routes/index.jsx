@@ -1,13 +1,13 @@
 import { createBrowserRouter } from 'react-router-dom';
 import Homepage from '../views/homepage';
 import NotFound from '../components/notFound';
-import Chatbox from '../components/chatbox';
 import LayoutPublic from './layoutPublic';
 import LayoutPrivate from './layoutPrivate';
 import ProfileUser from '../components/profileUser';
 import Chat from '../views/chat';
 import Friends from '../components/friends';
 import ProfileFriend from '../components/profileFriend';
+import Conversations from '../components/conversations';
 
 export const router = createBrowserRouter([
   {
@@ -38,6 +38,10 @@ export const router = createBrowserRouter([
           {
             path: '/chat/profile_friend',
             element: <ProfileFriend />,
+          },
+          {
+            path: '/chat/conversations',
+            element: <Conversations />,
           },
         ],
       },

@@ -12,7 +12,7 @@ const ProfileUser = () => {
       <div className="container-options">
         <ul>
           <Link to="/chat/friends">Friends</Link>
-          <li>Messages</li>
+          <Link to="/chat/conversations">Messages</Link>
         </ul>
       </div>
       <div className="container-actions">

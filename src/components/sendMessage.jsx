@@ -6,6 +6,7 @@ import { useGetRandomOnlineUser } from '../utils/useGetRandomOnlineUser';
 
 const SendMessage = () => {
   const [message, setMessage] = useState('');
+  const { user } = useGetRandomOnlineUser();
 
   const sendMessage = async (event) => {
     event.preventDefault();
@@ -15,13 +16,23 @@ const SendMessage = () => {
     }
 
     const { uid, displayName, photoURL } = auth.currentUser;
-    await addDoc(collection(db, 'messages'), {
+    //* Crear una referencia a la subcolección de mensajes
+    // Agregar datos a la subcolección de mensajes desde mensajes
+    const conversationId = (await user.uid.toString()) + (await uid.toString());
+    const messagesRef = collection(
+      db,
+      'conversations',
+      conversationId,
+      'messages'
+    );
+    await addDoc(messagesRef, {
       text: message,
       name: displayName,
       avatar: photoURL,
       createdAt: serverTimestamp(),
       uid,
     });
+
     setMessage('');
   };
 
