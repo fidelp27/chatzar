@@ -1,27 +1,21 @@
 import { useEffect, useRef, useState } from 'react';
 import { query, collection, orderBy, onSnapshot } from 'firebase/firestore';
-import { auth, db } from '../firebase';
+import { db } from '../firebase';
 import SendMessage from './sendMessage';
 import Message from './message';
 import { ToastContainer } from 'react-toastify';
-import { useGetRandomOnlineUser } from '../utils/useGetRandomOnlineUser';
+import { useParams } from 'react-router-dom';
 
 const Chatbox = () => {
   const [messages, setMessages] = useState([]);
   const messagesEndRef = useRef(null);
-  const { user } = useGetRandomOnlineUser();
-  const { uid, displayName, photoURL } = auth.currentUser;
+  const { conversationId } = useParams();
 
   const scrollBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const getproof = async () => {
-    const conversationId = (await user.uid.toString()) + (await uid.toString());
-    return conversationId;
-  };
   useEffect(() => {
-    getproof();
     const q = query(
       collection(db, 'conversations', conversationId, 'messages'),
       orderBy('createdAt')

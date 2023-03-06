@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { auth, db } from '../firebase';
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 import { customError } from '../utils/customError';
-import { useGetRandomOnlineUser } from '../utils/useGetRandomOnlineUser';
+import { useParams } from 'react-router-dom';
 
 const SendMessage = () => {
   const [message, setMessage] = useState('');
-  const { user } = useGetRandomOnlineUser();
+  const { conversationId } = useParams();
 
   const sendMessage = async (event) => {
     event.preventDefault();
@@ -18,7 +18,6 @@ const SendMessage = () => {
     const { uid, displayName, photoURL } = auth.currentUser;
     //* Crear una referencia a la subcolección de mensajes
     // Agregar datos a la subcolección de mensajes desde mensajes
-    const conversationId = (await user.uid.toString()) + (await uid.toString());
     const messagesRef = collection(
       db,
       'conversations',
