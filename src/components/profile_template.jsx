@@ -11,13 +11,12 @@ export default function Profile_template({ user, children }) {
       </span>
       <div className="container-info">
         <img
-          src={user.photoURL}
+          src={user?.photoURL || user?.avatar}
           className="profile-img"
-          alt={user.displayName}
+          alt={user?.displayName || user?.name}
         />
-        <p className="user-name">{user.displayName}</p>
-        <p className="user-email">{user.email}</p>
-        <p className="user-date">Member since: {user.metadata.creationTime}</p>
+        <p className="user-name">{user?.displayName || user?.name}</p>
+        <p className="user-email">{user?.email}</p>
       </div>
       {children}
     </div>

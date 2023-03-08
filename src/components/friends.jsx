@@ -13,6 +13,7 @@ export default function Friends() {
   const [user] = useAuthState(auth);
   const navigate = useNavigate();
   const createConversation = useCreateConversation();
+
   /* const getUsers = async () => {
     const querySnapshot = await collection(db, 'users');
     onSnapshot(querySnapshot, (snapshot) => {

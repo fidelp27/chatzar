@@ -1,15 +1,18 @@
 import { useEffect, useRef, useState } from 'react';
 import { query, collection, orderBy, onSnapshot } from 'firebase/firestore';
-import { db } from '../firebase';
+import { auth, db } from '../firebase';
 import SendMessage from './sendMessage';
 import Message from './message';
 import { ToastContainer } from 'react-toastify';
 import { useParams } from 'react-router-dom';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 const Chatbox = () => {
   const [messages, setMessages] = useState([]);
+  const [friendId, setFriendId] = useState('');
   const messagesEndRef = useRef(null);
   const { conversationId } = useParams();
+  const [user] = useAuthState(auth);
 
   const scrollBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -27,6 +30,7 @@ const Chatbox = () => {
       });
       setMessages(messages);
     });
+    setFriendId(conversationId.replace(user.uid, ''));
     return () => unsubscribe;
   }, []);
 
@@ -38,7 +42,7 @@ const Chatbox = () => {
     <main className="chat-box">
       <div className="messages-wrapper">
         {messages?.map((message) => (
-          <Message key={message.id} message={message} />
+          <Message key={message.id} message={message} friendId={friendId} />
         ))}
         <div ref={messagesEndRef} />
       </div>

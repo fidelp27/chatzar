@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { auth } from '../firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
-const Message = ({ message }) => {
+const Message = ({ message, friendId }) => {
   const [user] = useAuthState(auth);
   const [hour, setHour] = useState('');
 
@@ -27,7 +27,9 @@ const Message = ({ message }) => {
       <div className="chat-bubble__right">
         <Link
           to={
-            message.uid === user.uid ? '/chat/profile' : '/chat/profile_friend'
+            message.uid === user.uid
+              ? '/chat/profile'
+              : `/chat/profile_friend/${friendId}`
           }
           className="user-name"
         >

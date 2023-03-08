@@ -36,7 +36,7 @@ export const router = createBrowserRouter([
             element: <ProfileUser />,
           },
           {
-            path: '/chat/profile_friend',
+            path: '/chat/profile_friend/:friendId',
             element: <ProfileFriend />,
           },
           {

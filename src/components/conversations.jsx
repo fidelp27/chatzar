@@ -8,7 +8,6 @@ const Conversations = () => {
   //!Así abrimos la conversación desde este panel y obtenemos la referencia
   //!Usamos useParams para abrir la ventana de chat correcta
   let { conversations } = useGetConversations();
-  conversations.map((elem) => console.log(elem));
   const { uid } = auth.currentUser;
 
   return (
