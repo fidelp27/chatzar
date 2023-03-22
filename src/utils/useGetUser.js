@@ -1,18 +1,17 @@
 import { useState, useEffect } from 'react';
-import { collection, query, where, onSnapshot, doc } from 'firebase/firestore';
+import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../firebase';
 
-export const useGetUser = ({ friendId }) => {
+export const useGetUser = async (id) => {
   //Buscar personas conectadas
   const [userFriend, setUserFriend] = useState([]);
 
   try {
-    const docRef = doc(db, 'users', friendId);
-    const docSnap = getDoc(docRef);
-    console.log(docSnap.data());
+    const docRef = doc(db, 'users', id);
+    const docSnap = await getDoc(docRef);
     setUserFriend(docSnap.data());
   } catch (error) {
-    console.log(error);
+    console.log(error.message);
   }
 
   return userFriend;

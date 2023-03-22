@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { auth } from '../firebase';
 import Profile_template from './profile_template';
 

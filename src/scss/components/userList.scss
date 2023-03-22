@@ -11,27 +11,8 @@
     background-color: $fondo-chat;
     border-radius: 1rem;
     padding: .7rem;
-    img{
-        border-radius: 1rem;
-        width: 2rem;
-        margin-right: 10x;        
-    }
-    img:last-child{
-        margin-right: 5px;
-    }
-    p{
-        font-size: $font-size-medium;
-        margin-left: 5px;
-        text-align: start;
-        width: 160px;
-        font-size: $font-size-small;
-    }
-    span{
-        font-size: $font-size-big;
-    }
-    .user-avatar-error{
-        width: auto;
-    }
+    
+   
     .offline{
         color: $font-color-p;
     }

@@ -1,0 +1,12 @@
+@use "../utils/variables" as *;
+@use "../utils/mixins" as *;
+
+.conversations-container{
+    margin: 5rem auto;
+    .icon-action{
+        width: fit-content;
+        height: fit-content;
+    }
+
+
+}

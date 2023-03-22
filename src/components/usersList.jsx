@@ -1,17 +1,9 @@
-import React, { useState } from 'react';
-import userAvatar from '../utils/userAvatar';
+import React from 'react';
+import ImageError from './imageError';
 const UsersList = ({ user }) => {
-  const [imageError, setImageError] = useState(false);
-  const handleImageError = () => {
-    setImageError(true);
-  };
   return (
     <div className="container-usersList">
-      {!imageError ? (
-        <img src={user.avatar} alt={user.name} onError={handleImageError} />
-      ) : (
-        <p className="user-avatar-error">{userAvatar(user.name)}</p>
-      )}
+      <ImageError user={user} />
       <p>{user.name}</p>
       <img
         src={

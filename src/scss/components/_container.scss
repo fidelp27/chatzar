@@ -1,0 +1,16 @@
+@use "../utils/variables" as *;
+@use "../utils/mixins" as *;
+
+.container{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: $fondo-contraste;
+    color: $backgorund;
+    position: relative;
+    margin: 0 auto;
+    @include media-up("sm"){        
+        width: 20vw;
+    }
+}

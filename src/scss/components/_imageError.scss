@@ -1,0 +1,25 @@
+@use "../utils/variables" as *;
+@use "../utils/mixins" as *;
+
+img{
+    border-radius: 1rem;
+    width: 2rem;
+    margin-right: 10x;        
+}
+img:last-child{
+    margin-right: 5px;
+}
+
+span{
+    font-size: $font-size-big;
+}
+.user-avatar-error{
+    width: auto;
+    font-size: $font-size-medium;
+    margin: 10px;
+    text-align: start;
+    font-size: $font-size-small;
+    padding: .5rem;
+    background-color: $btn-hover;
+    border-radius: 1.5rem;
+}

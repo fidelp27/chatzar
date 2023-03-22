@@ -1,0 +1,62 @@
+@use "../utils/variables" as *;
+@use "../utils/mixins" as *;
+
+.container-userCard{
+    display: flex;
+    max-width: inherit;
+    background-color: $fondo-chat;
+    align-items: center;
+    border-radius: 1rem;
+    margin: .5rem auto;
+    a{
+        margin-top: 1rem;
+        max-width: 70vw;
+    }
+    img{
+        border-radius: 3rem;
+        width: 3rem;
+        margin: 1rem;
+    }
+    .text-content{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: start;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+
+        width: 65%;
+        .user-name{
+            color: $font-color;
+            font-size: $font-size-tiny;
+            margin-bottom: .5rem;
+        }
+        .conversation-message{
+            color: $font-color;
+            font-size: $font-size-small;
+            max-width:65%;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            position: relative;
+            text-align: left;
+
+            &.long-message {
+                position: relative;
+                &:after {
+                  content: "...";
+                  position: absolute;
+                  bottom: 0;
+                  right: 0;
+                  background-color: $fondo-chat;
+                  padding: 0 2px;
+                }
+              }
+        }
+        
+    }
+    
+
+   
+}

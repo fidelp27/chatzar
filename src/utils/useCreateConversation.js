@@ -1,15 +1,9 @@
-import {
-  collection,
-  doc,
-  setDoc,
-  addDoc,
-  serverTimestamp,
-} from 'firebase/firestore';
+import { doc, setDoc } from 'firebase/firestore';
 import { auth, db } from '../firebase';
 
 import { useGetRandomOnlineUser } from './useGetRandomOnlineUser';
 export const useCreateConversation = () => {
-  const { uid, displayName, photoURL } = auth.currentUser;
+  const { uid } = auth.currentUser;
   const { user, getRandomUser } = useGetRandomOnlineUser();
 
   const createConversation = async () => {
@@ -26,5 +20,5 @@ export const useCreateConversation = () => {
     }
   };
 
-  return createConversation;
+  return { createConversation };
 };
