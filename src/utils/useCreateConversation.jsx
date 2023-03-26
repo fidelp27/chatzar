@@ -1,15 +1,15 @@
 import { doc, setDoc } from 'firebase/firestore';
+import { useNavigate } from 'react-router-dom';
 import { auth, db } from '../firebase';
 
 import { useGetRandomOnlineUser } from './useGetRandomOnlineUser';
 export const useCreateConversation = () => {
   const { uid } = auth.currentUser;
   const { user, getRandomUser } = useGetRandomOnlineUser();
-
+  const navigate = useNavigate();
   const createConversation = async () => {
     getRandomUser();
-    const conversationId =
-      (await user?.uid.toString()) + (await uid?.toString());
+    const conversationId = user.uid.toString() + uid.toString();
 
     //* Crear una referencia personalizada para la conversación
     if (user.uid !== uid) {
@@ -17,6 +17,8 @@ export const useCreateConversation = () => {
       await setDoc(conversationRef, {
         members: [user.uid, uid],
       });
+      navigate(`/chat/${conversationId}`);
+      console.log('conversation created');
     }
   };
 

@@ -1,6 +1,7 @@
 import { doc, getDoc } from 'firebase/firestore';
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import { auth, db } from '../firebase';
 import { useCreateFriendship } from '../utils/useCreateFriendship';
 import { useGetUser } from '../utils/useGetUser';
@@ -26,23 +27,37 @@ export default function ProfileFriend() {
   }, [friendId]);
 
   return (
-    <Profile_template user={friend}>
-      <div className="container-invitation">
-        <button>
-          {' '}
-          <img
-            src="https://i.imgur.com/nEkCQFL.png"
-            className="icon-action"
-            alt="item"
-            onClick={() => createFriendship(uid, friendId)}
-          />
-        </button>
-      </div>
-      <ul>
-        <li>Block</li>
-        <li>Delete</li>
-        <li>Report</li>
-      </ul>
-    </Profile_template>
+    <>
+      <Profile_template user={friend}>
+        <div className="container-invitation">
+          <button>
+            {' '}
+            <img
+              src="https://i.imgur.com/nEkCQFL.png"
+              className="icon-action"
+              alt="item"
+              onClick={() => createFriendship(uid, friendId)}
+            />
+          </button>
+        </div>
+        <ul>
+          <li>Block</li>
+          <li>Delete</li>
+          <li>Report</li>
+        </ul>
+      </Profile_template>
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
+    </>
   );
 }

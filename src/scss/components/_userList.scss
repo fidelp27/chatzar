@@ -4,23 +4,27 @@
 .container-usersList{
     width: 90%;
     display: flex;
-    justify-content: space-between;
     align-items: center;
     text-align: left;
     margin: .5rem auto;
     background-color: $fondo-chat;
     border-radius: 1rem;
-    padding: .7rem;
+    padding: .5rem;
     
-   
-    .offline{
-        color: $font-color-p;
+    &.last-div {
+        justify-content: space-between;
     }
-    .online{
-        color: $font-color-online;
+
+    &.last-p {
+        justify-content: flex-start;
+        p{
+            margin-left: 1rem;
+        }
     }
+ 
     .icon-action{
         width: 24px;
         cursor: pointer;
+        margin-left: 5px;
     }
 }

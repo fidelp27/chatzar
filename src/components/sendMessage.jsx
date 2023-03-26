@@ -4,7 +4,7 @@ import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 import { customError } from '../utils/customError';
 import { useParams } from 'react-router-dom';
 
-const SendMessage = () => {
+const SendMessage = ({ disabledInput }) => {
   const [message, setMessage] = useState('');
   const { conversationId } = useParams();
 
@@ -49,6 +49,7 @@ const SendMessage = () => {
           placeholder="...text message"
           onChange={(e) => setMessage(e.target.value)}
           value={message}
+          disabled={disabledInput ? disabled : null}
         />
         <button type="submit" className="form-button">
           <img src="https://i.imgur.com/mU0KmN8.png" alt="send-icon" />

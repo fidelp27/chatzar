@@ -3,18 +3,20 @@ import { collection, query, where, onSnapshot } from 'firebase/firestore';
 import { db } from '../firebase';
 
 export const useGetOnlineUsers = () => {
-  //Buscar personas conectadas
   const [onlineUsers, setOnlineUsers] = useState([]);
+
   useEffect(() => {
     const q = query(collection(db, 'users'), where('isOnline', '==', true));
-    const users = [];
+
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      const users = [];
       querySnapshot.forEach((user) => users.push(user.data()));
+      setOnlineUsers(users);
+      console.log(onlineUsers);
     });
-    setOnlineUsers(users);
-    console.log(users);
-    return () => unsubscribe;
+
+    return unsubscribe;
   }, []);
 
-  return onlineUsers;
+  return { onlineUsers };
 };

@@ -1,60 +1,91 @@
-import { collection, getDocs, onSnapshot } from 'firebase/firestore';
+import { collection, onSnapshot, query, where } from 'firebase/firestore';
 import React, { useState, useEffect } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useNavigate } from 'react-router-dom';
 import { auth, db } from '../firebase';
 import UsersList from './usersList';
 import { useCreateConversation } from '../utils/useCreateConversation';
+import { useResponseFriendship } from '../utils/useResponseFriendship';
 export default function Friends() {
   const [search, setSearch] = useState('');
-  const [users, setUsers] = useState([]);
-  const [filteredUsers, setFilteredUsers] = useState([]);
   const [friends, setFriends] = useState([]);
+  const [sent, setSent] = useState([]);
+  const [received, setReceived] = useState([]);
   const [user] = useAuthState(auth);
   const navigate = useNavigate();
-  const createConversation = useCreateConversation();
+  const { createConversation } = useCreateConversation();
 
-  /* const getUsers = async () => {
-    const querySnapshot = await collection(db, 'users');
-    onSnapshot(querySnapshot, (snapshot) => {
-      const usersData = [];
-      snapshot.forEach((user) => {
-        usersData.push(user.data());
-      });
-      setUsers([...usersData]);
-    });
-  }; */
-
+  //**Obtener todos los amigos */
   const getFriends = async () => {
-    if (user) {
-      setFriends(users.filter((elem) => elem.uid == user.uid));
-    }
+    const q = query(
+      collection(db, 'friendships'),
+      where('Status', '==', 'Accepted')
+    );
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      const friends = [];
+      querySnapshot.forEach((doc) => {
+        if (doc.data().Sender === user.uid) {
+          friends.push(doc.data().Receiver);
+        } else if (doc.data().Receiver === user.uid) {
+          friends.push(doc.data().Sender);
+        } else {
+          console.log('No hay amigos');
+        }
+        setFriends(friends);
+      });
+      return () => unsubscribe();
+    });
+  };
+  //**Obtener todas las solicitudes enviadas en tiempo real con onSnapshot */
+  const getSent = async () => {
+    const q = query(
+      collection(db, 'friendships'),
+      where('Status', '==', 'Pending'),
+      where('Sender', '==', user.uid)
+    );
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      const sentrequests = [];
+      querySnapshot.forEach((doc) => {
+        sentrequests.push({
+          id_receiver: doc.data().Receiver,
+          id_conversation: doc.id,
+        });
+      });
+      setSent(sentrequests);
+      console.log(sent);
+    });
+    return () => unsubscribe();
   };
 
-  const filterUsers = async (word) => {
-    if (word.trim().length > 0) {
-      setFilteredUsers(
-        users.filter(
-          (user) =>
-            user.email.toLowerCase().includes(word.toLowerCase()) ||
-            user.name.toLowerCase().includes(word.toLowerCase())
-        )
-      );
-    } else {
-      setUsers(users);
-    }
+  //**Obtener todas las solicitudes recibidas en tiempo real */
+  const getReceived = async () => {
+    const q = query(
+      collection(db, 'friendships'),
+      where('Status', '==', 'Pending'),
+      where('Receiver', '==', user.uid)
+    );
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      const receivedrequests = [];
+      querySnapshot.forEach((doc) => {
+        receivedrequests.push({
+          id_sender: doc.data().Sender,
+          id_conversation: doc.id,
+        });
+      });
+      setReceived(receivedrequests);
+      console.log(received);
+    });
+    return () => unsubscribe();
   };
-
-  /*   useEffect(() => {
-    getUsers();
-  }, []); */
 
   useEffect(() => {
-    filterUsers(search);
-  }, [search]);
-
+    getFriends();
+    getSent();
+    getReceived();
+  }, []);
   return (
     <div className="container-friends">
+      {/* Filtro de busqueda */}
       <input
         type="text"
         className="search-input"
@@ -62,15 +93,47 @@ export default function Friends() {
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
-      <div className="filter-users-container">
-        {search.trim().length > 0
-          ? (search.trim().length > 0 ? filteredUsers : users).map((user) => {
-              return <UsersList user={user} key={user.uid} />;
-            })
-          : null}
+      {/* Solicitudes recibidas */}
+      <div
+        className={
+          !received || received.length <= 0
+            ? 'hide'
+            : 'filtered-received-request'
+        }
+      >
+        Solicitudes recibidas
+        {received.map((ids) => {
+          return (
+            <UsersList
+              id={ids.id_sender}
+              id_conversation={ids.id_conversation}
+              key={ids.id_conversation}
+              hide={false}
+            />
+          );
+        })}
       </div>
 
+      {/* Solicitudes enviadas */}
+      <div
+        className={!sent || sent.length <= 0 ? 'hide' : 'filtered-sent-request'}
+      >
+        Solicitudes enviadas
+        {sent.map((ids) => {
+          return (
+            <UsersList
+              id={ids.id_receiver}
+              id_conversation={ids.id_conversation}
+              key={ids.id_conversation}
+              hide={false}
+            />
+          );
+        })}
+      </div>
+
+      {/* Amistades */}
       <div className="friends-section">
+        Amigos
         {!friends || friends.length <= 0 ? (
           <>
             <p>You have no friends yet</p>
@@ -82,7 +145,7 @@ export default function Friends() {
           </>
         ) : (
           friends.map((user) => {
-            return <UsersList user={friends} key={user.uid} />;
+            return <UsersList id={user} key={user.uid} hide={true} />;
           })
         )}
       </div>

@@ -3,7 +3,7 @@
 
 .container-friends{
     width: 100vw;
-    height: 90vh;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     background-color: $fondo-contraste;
@@ -15,7 +15,7 @@
     }
     .search-input{
         width: 80%;
-        margin: 1rem auto;
+        margin: 5rem auto 0 auto;
         border: none;
         border-radius: 1rem;
         background-color: $fondo-chat;
